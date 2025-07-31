@@ -41,7 +41,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/produtos', listarProduto);
-app.post('/produtos', editarProduto)
+app.post('/produtos', editarProduto);
 app.post('/produtos', deletarProduto);
 
 app.use('/produtos', produto_web_router);
