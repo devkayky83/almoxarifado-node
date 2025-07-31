@@ -1,0 +1,20 @@
+{
+  "name": "almoxarifado-node",
+  "version": "1.0.0",
+  "description": "node-application",
+  "license": "ISC",
+  "author": "Kayky and Fellipe",
+  "type": "module",
+  "main": "app.mjs",
+  "scripts": {
+    "start": "node app.mjs",
+    "dev": "nodemon ./app.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "mysql2": "^3.14.2",
+    "nodemon": "^3.1.10",
+    "sequelize": "^6.37.7"
+  }
+}
