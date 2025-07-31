@@ -1,7 +1,7 @@
 <h1>Produtos</h1>
 
 <form action="/produtos/{{#if action}}save{{else}}create{{/if}}" method="post">
-    <input type="hidden" name="id" value="{{produto_editing.id}}">
+    {{!-- <input type="hidden" name="id" value="{{produto_editing.id}}"> --}}
 
     <label for="nome">Nome</label><br>
     <input type="text" id="nome" name="nome" value="{{produto_editing.nome}}" required><br><br>
@@ -55,12 +55,12 @@
             <td style="display: flex; justify-content: space-evenly;">
                 <form action="/produtos/edit" method="post">
                     <input type="hidden" name="id" value="{{this.id}}">
-                    <button>Editar</button>
+                    <button type="submit">Editar</button>
                 </form>
 
                 <form action="/produtos/delete" method="post">
                     <input type="hidden" name="id" value="{{this.id}}">
-                    <button>Excluir</button>
+                    <button type="submit">Excluir</button>
                 </form>
             </td>
         </tr>

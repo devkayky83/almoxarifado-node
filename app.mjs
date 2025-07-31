@@ -33,14 +33,14 @@ app.set('view engine', 'handlebars');
 app.set('views', './views');
 
 app.get('/', (req, res) => {
-    res.render('Rodando');
+    res.render('home', { title: 'Home' });
 });
 app.get('/produtos', (req, res) => {
-    res.render('produtos.handlebars'); 
+    res.render('produtos/produtos'); 
 });
 
 app.use('/produtos', produto_web_router);
 
-app.listen(3000, () => {
-    console.log("Servidor rodando na porta 3000");  
+app.listen(80, () => {
+    console.log("Servidor rodando na porta 80");  
 });

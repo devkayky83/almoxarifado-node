@@ -2,11 +2,6 @@ import { DataTypes } from "sequelize";
 import sequelize from "../database/mysql.js";
 
 const Produto = sequelize.define('Produto', {
-id: {
-  type: DataTypes.INTEGER,
-  primaryKey: true,
-  autoIncrement: true,
-},
 nome: {
   type: DataTypes.STRING(100),
   allowNull: false,

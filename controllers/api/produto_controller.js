@@ -2,7 +2,6 @@ import Produto from "../../models/produto.js"
 
 async function criarProduto(req, res) {
     const produto = await Produto.create({
-        id: req.body.id,
         nome: req.body.nome,
         tipo: req.body.tipo,
         quantidade: req.body.quantidade,
@@ -22,7 +21,6 @@ async function editarProduto(req, res) {
 
     const produto = await Produto.findOne({ where: { id: req.body.id } });
 
-    produto.id = req.body.id;
     produto.nome = req.body.nome;
     produto.tipo = req.body.tipo;
     produto.quantidade = req.body.quantidade;
