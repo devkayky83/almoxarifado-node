@@ -1,9 +1,3 @@
-import express from "express";
-import { create } from "express-handlebars";
-import { syncer } from "./database/mysql.js";
-import css from 'connect-session-sequelize';
-import session from 'express-session';
-import "./models/produto.js";
 
 import produto_web_router from "./routers/web/produto_routers.js";
 import usuario_web_router from "./routers/web/usuario_routers.js";
@@ -13,6 +7,21 @@ import { deletarProduto } from "./controllers/web/produto_controller.js";
 
 import sequelize from "./database/mysql.js";
 import { checkLogged } from "./controllers/web/usuario_controller.js";
+
+import fornecedor_web_router from './routers/web/fornecedor_routers.js';
+import { listarFornecedor } from './controllers/web/fornecedor_controller.js';
+import { editarFornecedor } from './controllers/web/fornecedor_controller.js';
+import { deletarFornecedor } from './controllers/web/fornecedor_controller.js';
+
+import departamento_web_router from './routers/web/departamento_routers.js';
+import { listarDepartamento } from './controllers/web/Departamento_controller.js';
+import { editarDepartamento } from './controllers/web/Departamento_controller.js';
+import { deletarDepartamento } from './controllers/web/Departamento_controller.js';
+
+import funcionario_web_router from './routers/web/funcionario_routers.js';
+import { listarFuncionario } from './controllers/web/funcionario_controller.js';
+import { editarFuncionario } from './controllers/web/funcionario_controller.js';
+import { deletarFuncionario } from './controllers/web/funcionario_controller.js';
 
 const conectado = await syncer();
 if (conectado) {
@@ -90,12 +99,6 @@ app.get("/", (req, res) => {
     res.redirect("/usuarios/login");
   }
 });
-
-app.get("/produtos", listarProduto);
-app.post("/produtos", editarProduto);
-app.post("/produtos", deletarProduto);
-
-app.use("/produtos", produto_web_router);
 
 app.listen(80, () => {
   console.log("Servidor rodando na porta 80");

@@ -5,7 +5,7 @@ const sequelize = new Sequelize({
     host: 'localhost',
     port: '3306',
     username: 'root',
-    password: 'Force_sql994',
+    password: 'root',
     database: 'almoxarifado-node',
 });
 
