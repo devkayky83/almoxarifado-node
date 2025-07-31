@@ -24,7 +24,7 @@ async function editarProduto(req, res) {
         return res.render('alerts', { title: 'Erro', body: 'Produto não encontrado para edição.' });
     }
 
-    res.render('produtos/editar', { produto: produtoEditar });
+    res.render('produtos/edicao', { produto: produtoEditar.get({ plain: true }) });
 }
 
 async function salvarProduto(req, res) {
