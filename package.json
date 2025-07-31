@@ -12,8 +12,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
+    "connect-session-sequelize": "^8.0.2",
     "express": "^5.1.0",
     "express-handlebars": "^8.0.1",
+    "express-session": "^1.18.2",
     "mysql2": "^3.14.2",
     "nodemon": "^3.1.10",
     "sequelize": "^6.37.7"
