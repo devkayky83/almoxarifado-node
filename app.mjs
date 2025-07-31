@@ -4,6 +4,9 @@ import { syncer } from './database/mysql.js';
 import './models/produto.js';
 
 import produto_web_router from './routers/web/produto_routers.js';
+import { listarProduto } from './controllers/web/produto_controller.js';
+import { editarProduto } from './controllers/web/produto_controller.js';
+import { deletarProduto } from './controllers/web/produto_controller.js';
 
 const conectado = await syncer();
 if (conectado) {
@@ -27,17 +30,19 @@ const hbs = create({
 });
 
 app.use(express.json());  
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended: true}));
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.set('views', './views');
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
     res.render('home', { title: 'Home' });
 });
-app.get('/produtos', (req, res) => {
-    res.render('produtos/produtos'); 
-});
+
+app.get('/produtos', listarProduto);
+app.post('/produtos', editarProduto)
+app.post('/produtos', deletarProduto);
 
 app.use('/produtos', produto_web_router);
 

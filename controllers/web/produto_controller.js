@@ -13,8 +13,8 @@ async function criarProduto(req, res) {
 };
 
 async function listarProduto(req, res) {
-    const produtos = await Produto.findAll();
-    res.render('produtos', { produtos });
+    const produtos = await Produto.findAll({raw: true});
+    res.render('produtos/produtos', { produtos });
 }
 
 async function editarProduto(req, res) {
@@ -24,7 +24,7 @@ async function editarProduto(req, res) {
         return res.render('alerts', { title: 'Erro', body: 'Produto não encontrado para edição.' });
     }
 
-    res.render('produtos/edit', { produto: produtoEditar });
+    res.render('produtos/editar', { produto: produtoEditar });
 }
 
 async function salvarProduto(req, res) {
