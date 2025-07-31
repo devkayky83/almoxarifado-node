@@ -1,4 +1,4 @@
-import { criarProduto, deletarProduto, editarProduto, listarProduto } from "../controllers/produto_controller.js";
+import { criarProduto, deletarProduto, editarProduto, listarProduto } from "../../controllers/api/produto_controller.js";
 import { Router } from "express";
 
 const produto_router = Router();

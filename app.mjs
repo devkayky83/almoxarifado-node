@@ -1,7 +1,9 @@
-import express from 'express';
-import produto_router from './routers/produto_routers.js';
+import express from 'express';;
+import { create } from 'express-handlebars';
 import { syncer } from './database/mysql.js';
 import './models/produto.js';
+
+import produto_web_router from './routers/web/produto_routers.js';
 
 const conectado = await syncer();
 if (conectado) {
@@ -11,12 +13,33 @@ if (conectado) {
 }
 
 const app = express();
-app.use(express.json());
+
+const hbs = create({
+    extname: 'handlebars',
+    defaultLayout: 'main',
+    layoutsDir: './views/layout/',
+    partialsDir: './views/partials/',
+    helpers: {
+    ifCond: function (v1, v2, options) {
+      return v1 === v2 ? options.fn(this) : options.inverse(this);
+    }
+}
+});
+
+app.use(express.json());  
+app.use(express.urlencoded());
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+app.set('views', './views');
 
 app.get('/', (req, res) => {
-    res.end('Rodando');
+    res.render('Rodando');
 });
-app.use('/produtos', produto_router);
+app.get('/produtos', (req, res) => {
+    res.render('produtos.handlebars'); 
+});
+
+app.use('/produtos', produto_web_router);
 
 app.listen(3000, () => {
     console.log("Servidor rodando na porta 3000");  
