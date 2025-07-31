@@ -1,0 +1,55 @@
+<h1>Departamentos</h1>
+
+<form action="/departamentos/{{#if action}}save{{else}}create{{/if}}" method="post">
+    {{!-- <input type="hidden" name="id" value="{{departamento_editing.id}}"> --}}
+
+    <label for="nome">Nome</label><br>
+    <input type="text" id="nome" name="nome" value="{{departamento_editing.nome}}" required><br><br>
+
+    <label for="representante">Representante</label><br>
+    <input type="text" id="representante" name="representante" value="{{departamento_editing.representante}}" required><br><br>
+
+    <label for="email">Email</label><br>
+    <input type="text" id="email" name="email" value="{{departamento_editing.email}}" required><br><br>
+
+    <label for="data_criacao">Data de Criação</label><br>
+    <input type="date" id="data_criacao" name="data_criacao" value="{{departamento_editing.data_criacao}}" required><br><br>
+
+
+    <button>{{#if action}}Editar{{else}}Criar{{/if}}</button>
+</form>
+
+<hr>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Representante</th>
+            <th>Email</th>
+            <th>Data de Criação</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each departamentos}}
+        <tr>
+            <td>{{this.nome}}</td>
+            <td>{{this.representante}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.data_criacao}}</td>
+            <td style="display: flex; justify-content: space-evenly;">
+                <form action="/departamentos/edit" method="post">
+                    <input type="hidden" name="id" value="{{this.id}}">
+                    <button type="submit">Editar</button>
+                </form>
+
+                <form action="/departamentos/delete" method="post">
+                    <input type="hidden" name="id" value="{{this.id}}">
+                    <button type="submit">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
