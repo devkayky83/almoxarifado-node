@@ -1,70 +1,88 @@
-<h1>Produtos</h1>
+<div class="container mt-5">
+    <div class="card p-4 shadow-sm">
+        <h1 class="card-title text-center mb-4">Produtos</h1>
 
-<form action="/produtos/{{#if action}}save{{else}}create{{/if}}" method="post">
-    {{!-- <input type="hidden" name="id" value="{{produto_editing.id}}"> --}}
+        <form action="/produtos/{{#if action}}save{{else}}create{{/if}}" method="post">
+            <input type="hidden" name="id" value="{{produto_editing.id}}">
 
-    <label for="nome">Nome</label><br>
-    <input type="text" id="nome" name="nome" value="{{produto_editing.nome}}" required><br><br>
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" value="{{produto_editing.nome}}" required>
+            </div>
 
-    <label for="tipo">Tipo</label><br>
-    <select id="tipo" name="tipo" required>
-        <option value="ALIMENTO" {{#ifCond produto_editing.tipo "ALIMENTO"}}selected{{/ifCond}}>Alimento</option>
-        <option value="LIMPEZA" {{#ifCond produto_editing.tipo "LIMPEZA"}}selected{{/ifCond}}>Limpeza</option>
-        <option value="ESCOLAR" {{#ifCond produto_editing.tipo "ESCOLAR"}}selected{{/ifCond}}>Escolar</option>
-        <option value="OUTROS" {{#ifCond produto_editing.tipo "OUTROS"}}selected{{/ifCond}}>Outros</option>
-    </select><br><br>
+            <div class="mb-3">
+                <label for="tipo" class="form-label">Tipo</label>
+                <select id="tipo" name="tipo" class="form-select" required>
+                    <option value="ALIMENTO" {{#ifCond produto_editing.tipo "ALIMENTO"}}selected{{/ifCond}}>Alimento</option>
+                    <option value="LIMPEZA" {{#ifCond produto_editing.tipo "LIMPEZA"}}selected{{/ifCond}}>Limpeza</option>
+                    <option value="ESCOLAR" {{#ifCond produto_editing.tipo "ESCOLAR"}}selected{{/ifCond}}>Escolar</option>
+                    <option value="OUTROS" {{#ifCond produto_editing.tipo "OUTROS"}}selected{{/ifCond}}>Outros</option>
+                </select>
+            </div>
 
-    <label for="quantidade">Quantidade</label><br>
-    <input type="number" id="quantidade" name="quantidade" value="{{produto_editing.quantidade}}" required><br><br>
+            <div class="mb-3">
+                <label for="quantidade" class="form-label">Quantidade</label>
+                <input type="number" class="form-control" id="quantidade" name="quantidade" value="{{produto_editing.quantidade}}" required>
+            </div>
 
-    <label for="data_fabricacao">Data de Fabricação</label><br>
-    <input type="date" id="data_fabricacao" name="data_fabricacao" value="{{produto_editing.data_fabricacao}}" required><br><br>
+            <div class="mb-3">
+                <label for="data_fabricacao" class="form-label">Data de Fabricação</label>
+                <input type="date" class="form-control" id="data_fabricacao" name="data_fabricacao" value="{{produto_editing.data_fabricacao}}" required>
+            </div>
 
-    <label for="data_validade">Data de Validade</label><br>
-    <input type="date" id="data_validade" name="data_validade" value="{{produto_editing.data_validade}}" required><br><br>
+            <div class="mb-3">
+                <label for="data_validade" class="form-label">Data de Validade</label>
+                <input type="date" class="form-control" id="data_validade" name="data_validade" value="{{produto_editing.data_validade}}" required>
+            </div>
 
-    <label for="observacoes">Observações</label><br>
-    <textarea id="observacoes" name="observacoes">{{produto_editing.observacoes}}</textarea><br><br>
+            <div class="mb-3">
+                <label for="observacoes" class="form-label">Observações</label>
+                <textarea id="observacoes" name="observacoes" class="form-control">{{produto_editing.observacoes}}</textarea>
+            </div>
 
-    <button>{{#if action}}Editar{{else}}Criar{{/if}}</button>
-</form>
+            <button type="submit" class="btn btn-primary w-100 mt-3">{{#if action}}Editar{{else}}Criar{{/if}}</button>
+        </form>
+    </div>
 
-<hr>
+    <hr class="my-5">
 
-<table>
-    <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Tipo</th>
-            <th>Quantidade</th>
-            <th>Fabricação</th>
-            <th>Validade</th>
-            <th>Observações</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each produtos}}
-        <tr>
-            <td>{{this.nome}}</td>
-            <td>{{this.tipo}}</td>
-            <td>{{this.quantidade}}</td>
-            <td>{{this.data_fabricacao}}</td>
-            <td>{{this.data_validade}}</td>
-            <td>{{this.observacoes}}</td>
-            <td style="display: flex; justify-content: space-evenly;">
-                <form action="/produtos/edit" method="post">
-                    <input type="hidden" name="id" value="{{this.id}}">
-                    <button type="submit">Editar</button>
-                </form>
-
-                <form action="/produtos/delete" method="post">
-                    <input type="hidden" name="id" value="{{this.id}}">
-                    <button type="submit">Excluir</button>
-                </form>
-            </td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
-
+    <div class="card p-4 shadow-sm">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Quantidade</th>
+                        <th>Fabricação</th>
+                        <th>Validade</th>
+                        <th>Observações</th>
+                        <th class="text-center">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each produtos}}
+                    <tr>
+                        <td>{{this.nome}}</td>
+                        <td>{{this.tipo}}</td>
+                        <td>{{this.quantidade}}</td>
+                        <td>{{this.data_fabricacao}}</td>
+                        <td>{{this.data_validade}}</td>
+                        <td>{{this.observacoes}}</td>
+                        <td class="text-center d-flex justify-content-center gap-2">
+                            <form action="/produtos/edit" method="post">
+                                <input type="hidden" name="id" value="{{this.id}}">
+                                <button type="submit" class="btn btn-sm btn-outline-info">Editar</button>
+                            </form>
+                            <form action="/produtos/delete" method="post">
+                                <input type="hidden" name="id" value="{{this.id}}">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,5 @@
 import Funcionario from "../../models/funcionario.js";
+import Usuario from "../../models/usuario.js";
 
 async function criarFuncionario(req, res) {
     const funcionario = await Funcionario.create({
@@ -17,13 +18,13 @@ async function listarFuncionario(req, res) {
 }
 
 async function editarFuncionario(req, res) {
-    const funcionarioEditar = await Funcionario.findOne({ where: { id: req.body.id } });
+    const usuarioEditar = await Usuario.findOne({ where: { id: req.body.id } });
 
-    if (!funcionarioEditar) {
+    if (!usuarioEditar) {
         return res.render('alerts', { title: 'Erro', body: 'Funcionario não encontrado para edição.' });
     }
 
-    res.render('funcionarios/editar', { funcionario: funcionarioEditar.get({ plain: true }) });
+    res.render('funcionarios/edicao', { funcionario: usuarioEditar.get({ plain: true }) });
 }
 
 async function salvarFuncionario(req, res) {
@@ -43,7 +44,6 @@ async function salvarFuncionario(req, res) {
 
     res.render('alerts', { title: 'Sucesso', body: 'Funcionario atualizado com sucesso.' });
 }
-
 
 async function deletarFuncionario(req, res) {
     const funcionario = await Funcionario.findOne({ where: { id: req.body.id } });

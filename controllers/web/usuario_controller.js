@@ -34,34 +34,52 @@ async function criarUsuario(req, res) {
   }
 }
 
+async function listarFuncionarios(req, res) {
+  try {
+    const usuarios = await Usuario.findAll(); 
+
+    console.log("Usuários encontrados no banco de dados:", usuarios)
+
+    res.render("funcionarios/funcionarios", { funcionarios: usuarios });
+  } catch (error) {
+    console.error("Erro ao listar funcionários:", error);
+    res.status(500).send("Erro interno do servidor.");
+  }
+}
+
 async function promptLogin(req, res) {
   res.render("usuarios/login");
 }
 
 async function login(req, res) {
-  const usuario = await Usuario.findOne({
-    where: {
-      [Op.or]: {
-        email: req.body.nome_usuario_or_email,
-        nome_usuario: req.body.nome_usuario_or_email,
-      },
-    },
-  });
+  const { nome_usuario, senha } = req.body;
+  try {
+    const usuario = await Usuario.findOne({ where: { nome_usuario } });
 
-  if (usuario) {
-    const resultado = await bcrypt.compare(req.body.senha, usuario.senha);
-
-    if (resultado) {
-      req.session.regenerate(async (err) => {
-        req.session.usuario = usuario;
-
-        req.app.locals.usuario = usuario;
-
-        res.redirect("/");
+    if (!usuario) {
+      return res.render("login", {
+        layout: "main",
+        login_fail: true,
+        message: "Usuário não encontrado.",
       });
     }
-  } else {
-    res.redirect("/usuarios/login");
+
+    const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
+    if (!senhaCorreta) {
+      return res.render("login", {
+        layout: "main",
+        login_fail: true,
+        message: "Senha incorreta.",
+      });
+    }
+    
+    req.session.usuario = usuario.get({ plain: true });
+
+    res.redirect("/");
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send("Erro interno do servidor.");
   }
 }
 
@@ -83,4 +101,4 @@ async function checkLogged(req, res, next) {
   }
 }
 
-export {promptUsuario, criarUsuario, promptLogin, login, logout, checkLogged};
+export {promptUsuario, criarUsuario, promptLogin, login, logout, listarFuncionarios, checkLogged};

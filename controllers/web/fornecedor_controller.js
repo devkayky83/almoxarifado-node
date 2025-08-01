@@ -21,7 +21,7 @@ async function editarFornecedor(req, res) {
         return res.render('alerts', { title: 'Erro', body: 'Fornecedor não encontrado para edição.' });
     }
 
-    res.render('fornecedores/editar', { fornecedor: fornecedorEditar.get({ plain: true }) });
+    res.render('fornecedores/edicao', { fornecedor: fornecedorEditar.get({ plain: true }) });
 }
 
 async function salvarFornecedor(req, res) {
@@ -35,7 +35,6 @@ async function salvarFornecedor(req, res) {
     fornecedor.email = req.body.email;
     fornecedor.endereco = req.body.endereco   
     
-
     await fornecedor.save();
 
     res.render('alerts', { title: 'Sucesso', body: 'Fornecedor atualizado com sucesso.' });

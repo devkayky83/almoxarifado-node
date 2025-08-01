@@ -1,0 +1,25 @@
+<div class="container mt-5">
+    <div class="card p-4 shadow-sm">
+        <h1 class="card-title text-center mb-4">Editar Fornecedores</h1>
+        <form action="/fornecedores/save" method="post">
+            <input type="hidden" name="id" value="{{fornecedor.id}}">
+
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" value="{{fornecedor.nome}}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" class="form-control" id="email" name="email" value="{{fornecedor.email}}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="endereco" class="form-label">Endereço</label>
+                <input type="text" class="form-control" id="endereco" name="endereco" value="{{fornecedor.endereco}}" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Salvar</button>
+        </form>
+    </div>
+</div>

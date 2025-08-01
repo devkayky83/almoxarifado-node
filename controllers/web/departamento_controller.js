@@ -22,7 +22,7 @@ async function editarDepartamento(req, res) {
         return res.render('alerts', { title: 'Erro', body: 'Departamento não encontrado para edição.' });
     }
 
-    res.render('departamentos/editar', { departamento: departamentoEditar.get({ plain: true }) });
+    res.render('departamentos/edicao', { departamento: departamentoEditar.get({ plain: true }) });
 }
 
 async function salvarDepartamento(req, res) {

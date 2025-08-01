@@ -1,0 +1,30 @@
+<div class="container mt-5">
+    <div class="card p-4 shadow-sm">
+        <h1 class="card-title text-center mb-4">Editar Departamentos</h1>
+        <form action="/departamentos/save" method="post">
+            <input type="hidden" name="id" value="{{departamento.id}}">
+
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" value="{{departamento.nome}}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="representante" class="form-label">Representante</label>
+                <input type="text" class="form-control" id="representante" name="representante" value="{{departamento.representante}}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" class="form-control" id="email" name="email" value="{{departamento.email}}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="data_criacao" class="form-label">Data de Criação</label>
+                <input type="date" class="form-control" id="data_criacao" name="data_criacao" value="{{departamento.data_criacao}}" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Salvar</button>
+        </form>
+    </div>
+</div>

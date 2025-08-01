@@ -6,6 +6,7 @@ import {
   criarUsuario,
   login,
   logout,
+  listarFuncionarios,
   promptLogin,
 } from "../../controllers/web/usuario_controller.js";
 
@@ -13,6 +14,7 @@ const usuario_web_router = express.Router();
 
 usuario_web_router.get("/registro", promptUsuario);
 usuario_web_router.post("/registro", criarUsuario);
+usuario_web_router.get("/", listarFuncionarios);
 usuario_web_router.get("/login", promptLogin);
 usuario_web_router.post("/login", login);
 usuario_web_router.get("/logout", logout);
